@@ -3,7 +3,14 @@ const morgan = require('morgan')
 const app = express()
 
 app.use(express.json())
-app.use(morgan('tiny'));
+morgan.token('body', function (req, res)
+{
+  // Token plus JSON.stringify
+  // When this returns null, a '-' is shown instead.
+  // I don't know how to remove it, but it isn't too ugly for me.
+  return req.method === 'POST' ? JSON.stringify(req.body) : null;
+})
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
 
 let persons = [
   {
@@ -80,7 +87,6 @@ app.post('/api/persons', (request, response) =>
     number: body.number,
     id: generateId(),
   }
-  console.log(person);
   persons = persons.concat(person);
   response.json(person);
 })
