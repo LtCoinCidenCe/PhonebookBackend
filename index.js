@@ -5,9 +5,9 @@ app.use(express.json())
 
 let persons = [
   {
-    "id": 1,
-    "name": "Arto Hellas",
-    "number": "040-123456"
+    id: 1,
+    name: "Arto Hellas",
+    number: "040-123456"
   },
   {
     "id": 2,
@@ -39,6 +39,41 @@ app.get('/api/persons/:id', (request, response) =>
     response.json(person);
   else
     response.status(404).end();
+})
+
+function getRandomInt(max)
+{
+  return Math.floor(Math.random() * max);
+}
+
+const generateId = () =>
+{
+  return getRandomInt(60000);
+}
+
+app.post('/api/persons', (request, response) =>
+{
+  const body = request.body
+  if (!body.name)
+  {
+    return response.status(400).json({
+      error: 'name missing'
+    })
+  }
+  if (!body.number)
+  {
+    return response.status(400).json({
+      error: 'name missing'
+    })
+  }
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: generateId(),
+  }
+  console.log(person);
+  persons = persons.concat(person);
+  response.json(person);
 })
 
 app.get('/info', (request, response) =>
