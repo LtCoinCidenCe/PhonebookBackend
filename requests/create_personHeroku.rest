@@ -1,0 +1,7 @@
+POST https://phonebookushiro.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+  "name":"Juha Hämäläinen",
+  "number":"04-465132478"
+}
