@@ -1,6 +1,6 @@
 # Phonebook Backend
 
-## exercise 3.10
+## completed part 3 phonebook backend exercises
 
 ## link to backend:
 https://phonebookushiro.herokuapp.com/
