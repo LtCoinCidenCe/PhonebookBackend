@@ -1,5 +1,5 @@
 // console database
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 if (process.argv.length !== 3 && process.argv.length !== 5)
 {
@@ -7,14 +7,14 @@ if (process.argv.length !== 3 && process.argv.length !== 5)
   process.exit(1);
 }
 
-const password = process.argv[2]
-const url = `mongodb+srv://ccckss:${password}@cluster0.vngkj.mongodb.net/phonebook?retryWrites=true&w=majority`
+const password = process.argv[2];
+const url = `mongodb+srv://ccckss:${password}@cluster0.vngkj.mongodb.net/phonebook?retryWrites=true&w=majority`;
 mongoose.connect(url);
 
 const personSchema = new mongoose.Schema({
   name: String,
   number: String
-})
+});
 
 const Person = mongoose.model('Person', personSchema);
 
@@ -26,12 +26,12 @@ if (process.argv.length === 5)
   const person = new Person({
     name: nimi,
     number: numero
-  })
+  });
   person.save().then(result =>
   {
     console.log(`added ${nimi} number ${numero} to phonebook`);
-    mongoose.connection.close()
-  })
+    mongoose.connection.close();
+  });
 }
 else if (process.argv.length === 3)
 {
@@ -42,8 +42,8 @@ else if (process.argv.length === 3)
     result.forEach(psn =>
     {
       console.log(psn.name, psn.number);
-    })
-    mongoose.connection.close()
-  })
+    });
+    mongoose.connection.close();
+  });
 }
 
